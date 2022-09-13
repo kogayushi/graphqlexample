@@ -1,5 +1,6 @@
 package graphqlexample.domain.model.user
 
+import graphqlexample.domain.model.NotFoundException
 import org.springframework.stereotype.Component
 import java.util.UUID
 
@@ -34,7 +35,7 @@ class UserRepository {
         )
 
 
-    fun resolveBy(userId: UUID): User = this.users.find { it.userId == userId } ?: throw IllegalArgumentException("user not found => $userId")
+    fun resolveBy(userId: UUID): User = this.users.find { it.userId == userId } ?: throw NotFoundException("user not found => $userId")
 
     fun resolveBy(userIds: Set<UUID>): List<User> = this.users.filter { it.userId in userIds }
 }

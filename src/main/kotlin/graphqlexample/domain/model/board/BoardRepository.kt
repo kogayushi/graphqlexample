@@ -1,5 +1,6 @@
 package graphqlexample.domain.model.board
 
+import graphqlexample.domain.model.NotFoundException
 import graphqlexample.domain.model.user.UserRepository
 import org.springframework.stereotype.Component
 import java.util.UUID
@@ -28,5 +29,5 @@ class BoardRepository {
 
     fun resolveAll(): List<Board> = boards
 
-    fun resolveBy(boardId: UUID): Board = this.boards.find { it.boardId == boardId } ?: throw IllegalArgumentException("board not found => $boardId")
+    fun resolveBy(boardId: UUID): Board = this.boards.find { it.boardId == boardId } ?: throw NotFoundException("board not found => $boardId")
 }
