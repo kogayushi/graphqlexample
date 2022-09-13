@@ -1,0 +1,30 @@
+schema {
+    query: Query
+}
+
+type Board {
+    author: User!
+    boardId: ID!
+    comments: [Comment]!
+    detail: String!
+    title: String!
+}
+
+type Comment {
+    author: User!
+    boardId: ID!
+    commentId: ID!
+    content: String!
+}
+
+type Query {
+    board(boardId: ID!): Board!
+    boards: [Board]!
+    comment(commentId: ID!): Comment!
+    comments(boardId: ID!): [Comment]!
+}
+
+type User {
+    name: String!
+    userId: ID!
+}
