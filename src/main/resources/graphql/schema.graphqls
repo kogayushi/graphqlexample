@@ -1,3 +1,6 @@
+directive @length(max: Int!) on FIELD_DEFINITION
+directive @description(value: String!) on FIELD_DEFINITION
+
 schema {
     query: Query
     mutation: Mutation
@@ -7,8 +10,8 @@ type Board {
     author: User!
     boardId: ID!
     comments: [Comment]!
-    detail: String!
-    title: String!
+    title: String! @length(max: 100) @description(value: "掲示板タイトル")
+    detail: String! @length(max: 100) @description(value: "掲示板詳細")
 }
 
 type Comment {
