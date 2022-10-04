@@ -3,3 +3,5 @@ spring:
     schema:
       printer:
         enabled: true # /graphql/schema
+    graphiql:
+      enabled: true
