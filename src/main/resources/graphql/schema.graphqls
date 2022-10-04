@@ -18,6 +18,11 @@ type Comment {
     content: String!
 }
 
+type User {
+    name: String!
+    userId: ID!
+}
+
 type Query {
     board(boardId: ID!): Board!
     boards: [Board]!
@@ -25,9 +30,6 @@ type Query {
     comments(boardId: ID!): [Comment]!
 }
 
-type User {
-    name: String!
-    userId: ID!
 type Mutation {
     registerBoard(
         title: String
