@@ -1,5 +1,6 @@
 schema {
     query: Query
+    mutation: Mutation
 }
 
 type Board {
@@ -27,4 +28,10 @@ type Query {
 type User {
     name: String!
     userId: ID!
+type Mutation {
+    registerBoard(
+        title: String
+        detail: String
+        hoge: String
+    ): Board
 }
