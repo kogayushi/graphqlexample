@@ -4,17 +4,16 @@ import graphqlexample.domain.model.board.Board
 import graphqlexample.domain.model.board.BoardInput
 import graphqlexample.domain.model.board.BoardRepository
 import graphqlexample.domain.model.user.UserRepository
-import org.springframework.graphql.data.method.annotation.Argument
-import org.springframework.graphql.data.method.annotation.Arguments
-import org.springframework.graphql.data.method.annotation.MutationMapping
-import org.springframework.graphql.data.method.annotation.QueryMapping
+import org.springframework.graphql.data.method.annotation.*
 import org.springframework.stereotype.Controller
+import reactor.core.publisher.Flux
 import java.util.*
 import javax.validation.Valid
 
 @Controller
 class BoardController(
     private val boardRepository: BoardRepository,
+    private val boardHandler: BoardHandler,
 ) {
 
     @QueryMapping
@@ -26,13 +25,23 @@ class BoardController(
     @MutationMapping
     fun registerBoard(@Valid @Arguments boardInput: BoardInput): Board {
 
-        val boardId = UUID.randomUUID()
+        val boardId = UUID.fromString("4f4b7126-549e-4521-b454-c7ac61aec0f6")
         val authorId = UserRepository.USER_ID_1
-        return Board(
+
+        val board = Board(
             boardId = boardId,
             title = boardInput.title ?: "anan",
             detail = boardInput.detail ?: "enen",
             authorId = authorId,
         )
+        boardRepository.save(board)
+        return board
+    }
+
+    @SubscriptionMapping
+    fun updatedBoard(@Argument boardId: UUID): Flux<Board> {
+        return boardHandler.getBoardStream().filter {
+            it.boardId == boardId
+        }
     }
 }
