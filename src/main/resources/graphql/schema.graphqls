@@ -37,6 +37,5 @@ type Mutation {
     registerBoard(
         title: String
         detail: String
-        hoge: String
     ): Board
 }

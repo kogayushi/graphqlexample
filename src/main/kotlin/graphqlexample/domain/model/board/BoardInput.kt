@@ -9,8 +9,6 @@ data class BoardInput(
     var title: String?,
     @field: NotEmpty
     var detail: String?,
-    @field: NotEmpty
-    var hoge: String?,
 ) {
 
     val titleAsNonnull by lazy { this.title!! }
