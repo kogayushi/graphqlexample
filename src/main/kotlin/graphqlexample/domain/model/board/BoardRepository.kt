@@ -2,13 +2,13 @@ package graphqlexample.domain.model.board
 
 import graphqlexample.domain.model.NotFoundException
 import graphqlexample.domain.model.user.UserRepository
-import graphqlexample.presentation.graphql.BoardHandler
+import graphqlexample.presentation.graphql.inflastructure.BoardEventPublisher
 import org.springframework.stereotype.Component
-import java.util.UUID
+import java.util.*
 
 @Component
 class BoardRepository(
-    private val boardHandler: BoardHandler,
+    private val boardEventPublisher: BoardEventPublisher,
 ) {
     companion object {
         val BOARD_ID_1 = UUID.fromString("098cb97b-3816-4342-817a-9c54656cf0a2")
@@ -35,6 +35,6 @@ class BoardRepository(
 
     fun save(board: Board) {
         boards += board
-        boardHandler.addBoard(board)
+        boardEventPublisher.publish(board)
     }
 }
