@@ -5,3 +5,5 @@ spring:
         enabled: true # /graphql/schema
     graphiql:
       enabled: true
+    websocket:
+      path: /graphql

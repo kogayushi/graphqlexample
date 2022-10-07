@@ -4,6 +4,7 @@ directive @description(value: String!) on FIELD_DEFINITION
 schema {
     query: Query
     mutation: Mutation
+    subscription: Subscription
 }
 
 type Board {
@@ -38,4 +39,8 @@ type Mutation {
         title: String
         detail: String
     ): Board
+}
+
+type Subscription {
+    updatedBoard(boardId: ID!): Board
 }
