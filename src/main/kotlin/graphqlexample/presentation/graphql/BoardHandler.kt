@@ -12,13 +12,13 @@ class BoardHandler {
     // many : 複数購読可能
     // multicast : 複数の購読者に配信（購読している全クライアントには配信する）
     // directAllOrNothing : 購読前のものは配信しない
-    private val logInfoSink: Many<Board> = Sinks.many().multicast().directAllOrNothing()
+    private val boardSink: Many<Board> = Sinks.many().multicast().directAllOrNothing()
 
     fun addBoard(board: Board) {
-        logInfoSink.tryEmitNext(board)
+        boardSink.tryEmitNext(board)
     }
 
     fun getBoardStream(): Flux<Board> {
-        return logInfoSink.asFlux().log()
+        return boardSink.asFlux().log()
     }
 }
