@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-graphql")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -31,6 +32,8 @@ dependencies {
     testImplementation ("com.tngtech.archunit:archunit-junit5:0.23.1") // for architecture test
 
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.1.7")
+
+    implementation("redis.clients:jedis")
 
 }
 
